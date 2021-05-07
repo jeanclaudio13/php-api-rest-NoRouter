@@ -18,7 +18,8 @@
 
         public function post()//Inserir, atualizar dependendo
         {
-
+            $data = $_POST;
+            return User::insert($data);
         }
 
         public function update()//Alterar

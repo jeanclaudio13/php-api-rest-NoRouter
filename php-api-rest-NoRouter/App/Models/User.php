@@ -44,6 +44,24 @@
         }
 
 
+        public static function insert($data){
+            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, \DBUSER, DBPASS);
 
+            $sql = 'INSERT INTO  '.self::$table.' (email, senha, nome) VALUES(:em, :pss, :no)';
+            $stmt = $connPdo->prepare($sql);
 
+            $stmt->bindValue(':em', $data['email']);
+            $stmt->bindValue(':pss', $data['senha']);
+            $stmt->bindValue(':no', $data['nome']);
+
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0){ //Encontrou pelo menos 1 linha
+                return 'Inserido com sucesso!';
+
+            } else {                
+                throw new \Exception("Fala ao inserir");
+            }
+        }
+            
     }
